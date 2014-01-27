@@ -1,12 +1,20 @@
 #!/usr/bin/env python
 
 from src.chef import *
+from src.ingredient_manager import *
+
+def make_ingredient_manager():
+    # TODO read a file, call a database, something?
+    # for now all ingredient info is hardcoded in the IngredientManager class,
+    # but that's not always gonna cut it...
+    return IngredientManager()
 
 class UIController:
 
     # Initialization creates a Chef object to which all commands will be passed
     def __init__(self):
-        self.chef = Chef()
+        ingredient_manager = make_ingredient_manager()
+        self.chef = Chef(ingredient_manager)
 
     # Returns a list of all Ingredients that MunchieMadness knows about
     def get_all_ingredients(self):

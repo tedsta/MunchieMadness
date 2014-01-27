@@ -1,32 +1,45 @@
 #!/usr/bin/env python
 
+from collections import namedtuple
+
+# TODO put namedtuple declaration in a utility module or something?        
+Recipe = namedtuple('Recipe', ['title', 'ingredients', 'instructions'])
+
+
 class Chef:
+
+    def __init__(self, ingredient_manager, inventory = None):
+        self.ing_mgr = ingredient_manager
+        if inventory == None:
+            self.inventory = []
+        else:
+            self.inventory = inventory
 
     # Returns a list of all Ingredients that MunchieMadness knows about
     def get_all_ingredients(self):
-        pass
+        return self.ing_mgr.get_all_ingredients()
 
     # Indicates that user actually has a given Ingredient
-    def add_to_inventoary(self, Ingredient):
-        pass
+    def add_to_inventory(self, ingredient):
+        if ingredient not in self.inventory and self.ing_mgr.verify_ingredient(ingredient):
+            self.inventory.append(ingredient)
 
     # Oops, user doesn't actually have any of that Ingredient
     def remove_from_inventory(self, ingredient):
-        pass
+        if ingredient in self.inventory:
+            self.inventory.remove(ingredient)
 
     # Start fresh
     def clear_inventory(self):
-        pass
+        self.inventory.clear()
 
     # Returns address of image corresponding to an Ingredient
     def get_image(self, Ingredient):
         pass
 
-    # This is where the magic happens. Returns a Recipe, which has:
-        # title, a string like "Peanut Butter Chocoloate Chip Popcorn Sandwich"
-        # ingredients, a list of strings like ['Bread', 'Peanut Butter', 'Chocolate Chips', 'Popcorn']
-        # instructions, a list of strings like ['Spread peanut butter on one or both slices of bread', 'Sprinkle with Chocolate Chips', ...]
-        # TODO some sort of weirdness score?
     def generate_recipe(self):
-        pass
+        ingreds = ['Bread', 'Butter', 'Ham', 'Cheese', 'Popcorn']
+        instructs = ['Slice cheese', 'Pop popcorn', 'Put Ham, Cheese and Popcorn between slices of Bread', 'Spread Butter on outside of Bread', 'Grill over medium low heat, turning once', 'Cut in half and enjoy']
+        hardcoded_result = Recipe(title='Grilled Ham, Cheese and Popcorn Sandwich', ingredients=ingreds, instructions=instructs)
+        return hardcoded_result
 
