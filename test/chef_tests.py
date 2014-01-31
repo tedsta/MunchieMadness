@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import unittest
-from unittest.mock import Mock
+from mock import Mock
 from src.chef import *
 
 
@@ -44,12 +44,12 @@ class TestChef(unittest.TestCase):
         self.assertEqual(0, len(self.chef.inventory))
 
     def test_get_image(self):
-        #TODO
-        pass
+        self.chef.get_image('Popcorn')
+        self.ing_mgr.get_image.assert_called_with('Popcorn')
         
     def test_generate_recipe(self):
         # this tests the hardcoded method. a proper test would add ingredients before calling the method and assert that a Recipe is returned...
-        recipe = self.chef.generate_recipe()
+        recipe = self.chef.generate_recipe(5)
         self.assertTrue(recipe)
         self.assertTrue(recipe.title)
         self.assertTrue('Popcorn' in recipe.ingredients) 

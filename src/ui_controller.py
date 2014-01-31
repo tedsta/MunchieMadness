@@ -41,6 +41,6 @@ class UIController:
         # ingredients, a list of strings like ['Bread', 'Peanut Butter', 'Chocolate Chips', 'Popcorn']
         # instructions, a list of strings like ['Spread peanut butter on one or both slices of bread', 'Sprinkle with Chocolate Chips', ...]
         # TODO some sort of weirdness score?
-    def generate_recipe(self):
-        return self.chef.generate_recipe()
+    def generate_recipe(self, max_score):
+        return self.chef.generate_recipe(max_score)
 

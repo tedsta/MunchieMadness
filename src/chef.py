@@ -3,7 +3,7 @@
 from collections import namedtuple
 
 # TODO put namedtuple declaration in a utility module or something?        
-Recipe = namedtuple('Recipe', ['title', 'ingredients', 'instructions'])
+Recipe = namedtuple('Recipe', ['title', 'ingredients', 'instructions', 'score'])
 
 
 class Chef:
@@ -31,15 +31,16 @@ class Chef:
 
     # Start fresh
     def clear_inventory(self):
-        self.inventory.clear()
+        del self.inventory[:]
 
     # Returns address of image corresponding to an Ingredient
-    def get_image(self, Ingredient):
-        pass
+    def get_image(self, ingredient):
+        return self.ing_mgr.get_image(ingredient)
 
-    def generate_recipe(self):
+    def generate_recipe(self, max_score):
         ingreds = ['Bread', 'Butter', 'Ham', 'Cheese', 'Popcorn']
         instructs = ['Slice cheese', 'Pop popcorn', 'Put Ham, Cheese and Popcorn between slices of Bread', 'Spread Butter on outside of Bread', 'Grill over medium low heat, turning once', 'Cut in half and enjoy']
-        hardcoded_result = Recipe(title='Grilled Ham, Cheese and Popcorn Sandwich', ingredients=ingreds, instructions=instructs)
+        score = 3
+        hardcoded_result = Recipe(title='Grilled Ham, Cheese and Popcorn Sandwich', ingredients=ingreds, instructions=instructs, score=score)
         return hardcoded_result
 

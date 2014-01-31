@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import os
+
 class IngredientManager:
 
     ALL_INGREDIENTS = ['Bread', 'Butter', 'Ham', 'Cheese', 'Popcorn']
@@ -12,6 +14,10 @@ class IngredientManager:
         return ingredient in self.ALL_INGREDIENTS
 
     # Returns address of image corresponding to an Ingredient
-    def get_image(self, Ingredient):
-        pass
+    def get_image(self, ingredient):
+        path = 'images/' + ingredient.lower() + '.png'
+        if os.path.exists(path):
+            return path
+        else:
+            return None
 

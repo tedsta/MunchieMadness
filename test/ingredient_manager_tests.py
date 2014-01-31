@@ -20,6 +20,11 @@ class TestIngredientManager(unittest.TestCase):
     def test_verify_ingredient(self):
         self.assertTrue(self.mgr.verify_ingredient('Cheese'))
 
+    def test_get_image(self):
+        img_path = self.mgr.get_image('Popcorn')
+        self.assertEqual('images/popcorn.png', img_path)
+        
+
         
 
 
