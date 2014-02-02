@@ -2,7 +2,7 @@
 
 import unittest
 from src.ui_controller import *
-from unittest.mock import Mock
+from mock import Mock
 
 
 class TestUIController(unittest.TestCase):
@@ -36,13 +36,13 @@ class TestUIController(unittest.TestCase):
 
     def test_get_image(self):
         self.ui.chef = Mock()
-        self.ui.get_image('Popcorn')
+        img_path = self.ui.get_image('Popcorn')
         self.ui.chef.get_image.assert_called_with('Popcorn')
         
     def test_generate_recipe(self):
         self.ui.chef = Mock()
-        self.ui.generate_recipe()
-        self.ui.chef.generate_recipe.assert_called_with()
+        self.ui.generate_recipe(5)
+        self.ui.chef.generate_recipe.assert_called_with(5)
 
 
 ##########################
