@@ -7,7 +7,6 @@ import (
 )
 
 type Context struct {
-	foo int
 }
 
 func rootHandler(w http.ResponseWriter, r *http.Request, c *Context) {
@@ -21,7 +20,7 @@ func makeHandler(c *Context, fn func(http.ResponseWriter, *http.Request, *Contex
 }
 
 func main() {
-	c := &Context{42}
+	c := &Context{}
 
 	http.HandleFunc("/", makeHandler(c, rootHandler))
 
