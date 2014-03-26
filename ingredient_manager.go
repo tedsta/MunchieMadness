@@ -31,7 +31,6 @@ func (i *IngredientManager) GetImage(ingredient string) string {
 	path := "images/" + strings.ToLower(ingredient) + ".png"
 	if _, err := os.Stat(path); os.IsExist(err) {
 		return path
-	} else {
-		return ""
-	}
+	} 
+	return ""
 }
