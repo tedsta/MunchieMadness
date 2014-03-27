@@ -1,0 +1,21 @@
+<html>
+    <body>
+        <h1>{{.Rec.Title}}</h1>
+        <h3>Ingredients:</h3>
+        <ul>
+        {{range .Rec.Ingredients}}
+        <li>{{.}}</li>
+        {{end}}
+        </ul>
+
+        <h3>Instructions:</h3>
+        <ul>
+        {{range .Rec.Instructions}}
+            <li>{{.}}</li>
+        {{end}}
+        <ul>
+        <h4>Weirdness Score: {{.Rec.Score}}</h4>
+
+        <p>Full disclosure: this recipe is hardcoded into the "/recipe" handler. TODO get ingredients from http response, call function to generate recipe, put it here :)</p>
+    </body>
+</html>

@@ -1,15 +1,17 @@
 <html>
     <body>
-        <h1>Add Ingredients</h1>
+        <h1>Munchie Madness</h1>
+        <h3>Add Ingredients</h3>
+        <form id="add_ingredients" action="/recipe" method="POST">
+            {{range .Inglist}}
+            <div>
+                <input type="checkbox" id="{{.}}" name="{{.}}" />
+                <label for="{{.}}">{{.}}</label>
+            </div>
+            {{end}}
 
-        {{range .Inglist}}
-        <div>
-            <input type="checkbox" id="{{.}}" name="{{.}}" />
-            <label for="{{.}}">{{.}}</label>
-        </div>
-        {{end}}
-
-        <input type="submit" name="submit_ingredients" value="Generate Recipe">
+            <input type="submit" name="submit_ingredients" value="Generate Recipe">
+        </form>
 
     </body>
 </html>

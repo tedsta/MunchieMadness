@@ -1,10 +1,10 @@
 package main
 
 type Recipe struct {
-	title        string
-	ingredients  []string
-	instructions []string
-	score        int
+	Title        string
+	Ingredients  []string
+	Instructions []string
+	Score        int
 }
 
 type Chef struct {
