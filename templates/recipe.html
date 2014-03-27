@@ -15,7 +15,6 @@
         {{end}}
         <ul>
         <h4>Weirdness Score: {{.Rec.Score}}</h4>
-
-        <p>Full disclosure: this recipe is hardcoded into the "/recipe" handler. TODO get ingredients from http response, call function to generate recipe, put it here :)</p>
+        <p>Note: Chef is dumb right now; this recipe is hardcoded. You selected {{range .MyChef.Inventory}} {{.}}{{end}}; Chef assumes you have all ingredients.</p>
     </body>
 </html>

@@ -12,7 +12,7 @@ func NewUIController() *UIController {
 }
 
 // Returns a list of all Ingredients that MunchieMadness knows about
-func (u *UIController) GetAllIngredients() IngredientList {
+func (u *UIController) GetAllIngredients() []string {
 	return u.chef.GetAllIngredients()
 }
 

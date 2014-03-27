@@ -7,15 +7,14 @@ import (
 )
 
 type Context struct {
-	Ingman  *IngredientManager
-	Inglist IngredientList
-	Rec Recipe
+	MyChef Chef
+	Inglist []string
+	Rec *Recipe
 }
 
 func NewContext() *Context {
 	c := &Context{}
-	c.Ingman = NewIngredientManager()
-	c.Inglist = c.Ingman.GetAllIngredients()
+	c.Inglist = c.MyChef.GetAllIngredients()
 	return c
 }
 
@@ -30,7 +29,15 @@ func rootHandler(w http.ResponseWriter, r *http.Request, c *Context) {
 }
 
 func recipeHandler(w http.ResponseWriter, r *http.Request, c *Context) {
-	c.Rec = Recipe{"Popcorn Grilled Ham and Cheese Sandwich", []string{"Popcorn", "Bread", "Ham", "Cheese", "Butter"}, []string{"put it together", "enjoy"}, 8}
+	// Parse form, add selected ingredients to inventory
+	for _, ing := range c.Inglist {
+		if r.FormValue(ing) == "on" {
+			c.MyChef.AddToInventory(ing)
+		}
+	}
+
+	// Generate recipe and serve page
+	c.Rec = c.MyChef.GenerateRecipe(10)
 	renderTemplate(w, "templates/recipe.html", c)
 }
 

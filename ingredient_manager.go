@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-var allIngredients IngredientList = []string{"Bread", "Butter", "Ham", "Cheese", "Popcorn"}
+var allIngredients = []string{"Bread", "Butter", "Ham", "Cheese", "Popcorn"}
 
 type IngredientManager struct {
 }
@@ -18,12 +18,17 @@ func NewIngredientManager() *IngredientManager {
 }
 
 // Returns a list of all Ingredients that MunchieMadness knows about
-func (i *IngredientManager) GetAllIngredients() IngredientList {
+func (i *IngredientManager) GetAllIngredients() []string {
 	return allIngredients
 }
 
 func (i *IngredientManager) VerifyIngredient(ingredient string) bool {
-	return allIngredients.Contains(ingredient)
+	for _, ing := range allIngredients {
+		if ing == ingredient {
+			return true
+		}
+	}
+	return false
 }
 
 // Returns address of image corresponding to an Ingredient

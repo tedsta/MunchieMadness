@@ -9,37 +9,48 @@ type Recipe struct {
 
 type Chef struct {
 	ingMgr    *IngredientManager
-	inventory IngredientList
+	Inventory []string
 }
 
-func NewChef(ingMgr *IngredientManager, inventory IngredientList) *Chef {
+func NewChef(ingMgr *IngredientManager, inventory []string) *Chef {
 	return &Chef{ingMgr, inventory}
 }
 
 // Returns a list of all Ingredients that MunchieMadness knows about
-func (c *Chef) GetAllIngredients() IngredientList {
+func (c *Chef) GetAllIngredients() []string{
 	return c.ingMgr.GetAllIngredients()
 }
 
 func (c *Chef) HasIngredient(ingredient string) bool {
-	return c.inventory.Contains(ingredient)
+	for _, ing := range c.Inventory {
+		if ing == ingredient {
+			return true
+		}
+	}
+	return false
 }
 
 // Indicates that user actually has a given Ingredient
 func (c *Chef) AddToInventory(ingredient string) {
 	if c.ingMgr.VerifyIngredient(ingredient) {
-		c.inventory.Add(ingredient)
+		c.Inventory = append(c.Inventory, ingredient)
 	}
 }
 
 // Oops, user doesn't actually have any of that Ingredient
 func (c *Chef) RemoveFromInventory(ingredient string) {
-	c.inventory.Remove(ingredient)
+	for index, ing := range c.Inventory {
+		if ing == ingredient {
+			// To remove the ingredient, we set it to the last element and shorten the slice by 1
+			c.Inventory[index] = c.Inventory[len(c.Inventory)-1]
+			c.Inventory = c.Inventory[:len(c.Inventory)-1]
+		}
+	}
 }
 
 // Start fresh
 func (c *Chef) ClearInventory() {
-	c.inventory.Clear()
+	c.Inventory = c.Inventory[:0]
 }
 
 // Returns address of image corresponding to an Ingredient
