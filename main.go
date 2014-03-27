@@ -7,10 +7,12 @@ import (
 )
 
 type Context struct {
+	Ingman *IngredientManager
+	Inglist IngredientList
 }
 
 func rootHandler(w http.ResponseWriter, r *http.Request, c *Context) {
-	renderTemplate(w, "index.html")
+	renderTemplate(w, "templates/add_ingredients.html", c)
 }
 
 func makeHandler(c *Context, fn func(http.ResponseWriter, *http.Request, *Context)) http.HandlerFunc {
@@ -20,7 +22,8 @@ func makeHandler(c *Context, fn func(http.ResponseWriter, *http.Request, *Contex
 }
 
 func main() {
-	c := &Context{}
+	c := &Context{NewIngredientManager(), IngredientList{}}
+	c.Inglist = c.Ingman.GetAllIngredients()
 
 	http.HandleFunc("/", makeHandler(c, rootHandler))
 
@@ -31,13 +34,13 @@ func main() {
 	}
 }
 
-func renderTemplate(w http.ResponseWriter, tmpl string) {
+func renderTemplate(w http.ResponseWriter, tmpl string, c *Context ) {
 	t, err := template.ParseFiles(tmpl)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	err = t.Execute(w, nil)
+	err = t.Execute(w, c)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}

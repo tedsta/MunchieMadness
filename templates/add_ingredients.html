@@ -1,0 +1,16 @@
+<html>
+    <body>
+        <h1>Add Ingredients</h1>
+
+        {{range .Inglist}}
+        <div>
+            <input type="checkbox" id="{{.}}" name="{{.}}" />
+            <label for="{{.}}">{{.}}</label>
+        </div>
+        {{end}}
+
+        <input type="submit" name="submit_ingredients" value="Generate Recipe">
+
+    </body>
+</html>
+
